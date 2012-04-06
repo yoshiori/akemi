@@ -1,5 +1,6 @@
-A sample for the Typesafe Stack (http://typesafe.com/stack).
+Akemi
+==========
 
-Scala sample project using Scala and SBT.
+scala kestrel and redis sample
 
 To run and test it use SBT invoke: 'sbt run'
