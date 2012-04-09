@@ -32,5 +32,8 @@ object MainApp {
         msg.ack.sync()
       }
     }
+    readHandle.close()
+    kestrelClient.close()
+    redisClient.close()
   }
 }
