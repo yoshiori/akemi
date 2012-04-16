@@ -3,19 +3,24 @@ import sbt.Keys._
 
 object ProjectBuild extends Build {
 
+  val twitterLibVersion = "3.0.0"
+
   lazy val root = Project(
     id = "root",
     base = file("."),
     settings = Project.defaultSettings ++ Seq(
       name := "akemi",
-      organization := "org.yoshiori",
+      organization := "org.yoshiori.akemi",
       version := "0.1-SNAPSHOT",
       scalaVersion := "2.9.1",
       resolvers += "twitter-repo" at "http://maven.twttr.com",
 
       libraryDependencies ++= Seq(
-        "com.twitter" %% "finagle-kestrel" % "3.0.0",
-        "com.twitter" %% "finagle-redis" % "3.0.0"
+        "com.twitter" %% "finagle-kestrel" % twitterLibVersion,
+        "com.twitter" %% "finagle-redis" % twitterLibVersion,
+        "com.twitter" %% "util-eval" % twitterLibVersion,
+        "org.clapper" %% "grizzled-slf4j" % "0.6.8",
+        "ch.qos.logback" % "logback-classic" % "1.0.1"
       )
     )
   )
