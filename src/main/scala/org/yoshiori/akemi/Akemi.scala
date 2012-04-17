@@ -24,7 +24,7 @@ class Akemi(conf:AkemiConfig) extends Logging {
 
   val DELETE_KEY = "delete_key"
 
-  def run(){
+  def run {
     info("run")
     val kestrelClient = KestrelClient(conf.kestrelServer)
     val redisClient = RedisClient(conf.redisServer)
@@ -34,6 +34,11 @@ class Akemi(conf:AkemiConfig) extends Logging {
       Seq(kestrelClient.readReliably(DELETE_KEY, timer, retryBackoffs))
     }
     val readHandle: ReadHandle = ReadHandle.merged(readHandles)
+
+    readHandle.error foreach { t =>
+      error(t)
+    }
+
     readHandle.messages foreach { msg =>
       try {
         val key = msg.bytes.toString(CharsetUtil.UTF_8) 
