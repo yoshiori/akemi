@@ -1,6 +1,0 @@
-Akemi
-==========
-
-scala kestrel and redis sample
-
-To run and test it use SBT invoke: 'sbt run'
