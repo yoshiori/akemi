@@ -16,9 +16,15 @@ object ProjectBuild extends Build {
       resolvers += "twitter-repo" at "http://maven.twttr.com",
 
       libraryDependencies ++= Seq(
+        // test
+        "org.specs2" %% "specs2" % "1.9" % "test",
+            
+        // twitter lib
         "com.twitter" %% "finagle-kestrel" % twitterLibVersion,
         "com.twitter" %% "finagle-redis" % twitterLibVersion,
         "com.twitter" %% "util-eval" % twitterLibVersion,
+
+        //log
         "org.clapper" %% "grizzled-slf4j" % "0.6.8",
         "ch.qos.logback" % "logback-classic" % "1.0.1"
       )
