@@ -1,4 +1,4 @@
-import org.yoshiori.akemi.AkemiConfig
+import org.yoshiori.akemi.conf.AkemiConfig
 
 new AkemiConfig {
   val kestrelServer = "localhost:22133"

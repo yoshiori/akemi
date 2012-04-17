@@ -1,4 +1,4 @@
-package org.yoshiori.akemi
+package org.yoshiori.akemi.conf
 
 trait AkemiConfig {
   val kestrelServer: String
