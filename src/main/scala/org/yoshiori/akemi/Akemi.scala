@@ -25,6 +25,9 @@ class Akemi(conf:AkemiConfig) extends Logging {
   val DELETE_KEY = "delete_key"
 
   def run {
+    logger.info("kestrel server is %s".format(conf.kestrelServer))
+    logger.info("redis server is %s".format(conf.redisServer))
+
     info("run")
     val kestrelClient = KestrelClient(conf.kestrelServer)
     val redisClient = RedisClient(conf.redisServer)

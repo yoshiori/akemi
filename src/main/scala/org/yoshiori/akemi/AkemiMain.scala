@@ -14,17 +14,27 @@ case class InitParam(path: String, isCheck:Boolean, isHelp:Boolean)
 object AkemiMain {
 
   val logger = Logger("AkemiMain")
+  val helpText = """
+Usage:
+       -c     conf check mode
 
+       -p     conf file path
+
+       --help display this help and exit
+"""
 
   def main(args: Array[String]) {
     logger.info("start Akemi")
-    val eval = new Eval
-    val conf = eval[AkemiConfig](new java.io.File("config/AkemiConfigSample.scala"))
-
-    logger.info("kestrel server is %s".format(conf.kestrelServer))
-    logger.info("redis server is %s".format(conf.redisServer))
-    val akemi = Akemi(conf)
-    akemi.run
+    parse(args) match {
+      case InitParam( _, _, true ) => println(helpText)
+      case InitParam(path, true, _ ) => println(check(path))
+      case InitParam(path, _, _ ) => {
+        val eval = new Eval
+        val conf = eval[AkemiConfig](new java.io.File("config/AkemiConfigSample.scala"))
+        val akemi = Akemi(conf)
+        akemi.run
+      }
+    }
   }
 
   def check(path: String): String = {
