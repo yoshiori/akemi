@@ -3,6 +3,7 @@ package org.yoshiori.akemi
 import org.specs2.mutable._
 
 class AkemiMainSpec extends Specification {
+
   "引数にパスが渡されていた場合（-p /）" should {
     val param = AkemiMain.parse(Array("-p","/"))
 
@@ -66,5 +67,19 @@ class AkemiMainSpec extends Specification {
       param.isHelp must beTrue
     }
   }
+  
+  "正常な conf のチェック" should {
+    val path = getClass.getResource("/AkemiConfigTest1.scala").getPath
+    "success が返ってくる" in {
+      AkemiMain.check(path) must be_==("success")
+    }
+  }
 
+  "不正な conf のチェック" should {
+    val path = getClass.getResource("/AkemiConfigTest_error1.scala").getPath
+
+    "エラーメッセージが返ってくる" in {
+      AkemiMain.check(path) must not be_==("success")
+    }
+  }
 }

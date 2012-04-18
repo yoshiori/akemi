@@ -1,7 +1,7 @@
 package org.yoshiori.akemi
 
 import com.twitter.util.Eval
-
+import com.twitter.util.Eval._
 import grizzled.slf4j.Logger
 
 import org.yoshiori.akemi.conf.AkemiConfig
@@ -12,6 +12,7 @@ object AkemiMain {
 
   val logger = Logger("AkemiMain")
 
+
   def main(args: Array[String]) {
     logger.info("start Akemi")
     val eval = new Eval
@@ -21,6 +22,18 @@ object AkemiMain {
     logger.info("redis server is %s".format(conf.redisServer))
     val akemi = Akemi(conf)
     akemi.run
+  }
+
+  def check(path: String): String = {
+    try {
+      val eval = new Eval
+      eval.check(new java.io.File(path))
+      "success"
+    } catch {
+      case e: CompilerException => {
+        e.getMessage
+      }
+    }
   }
 
   def parse(args: Array[String]): InitParam = {
