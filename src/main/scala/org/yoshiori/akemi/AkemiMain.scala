@@ -1,8 +1,11 @@
 package org.yoshiori.akemi
 
+import java.io.FileNotFoundException
+
 import com.twitter.util.Eval
 import com.twitter.util.Eval._
 import grizzled.slf4j.Logger
+
 
 import org.yoshiori.akemi.conf.AkemiConfig
 
@@ -30,9 +33,8 @@ object AkemiMain {
       eval.check(new java.io.File(path))
       "success"
     } catch {
-      case e: CompilerException => {
-        e.getMessage
-      }
+      case e: CompilerException => e.getMessage
+      case e: FileNotFoundException => e.getMessage
     }
   }
 

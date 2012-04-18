@@ -67,19 +67,19 @@ class AkemiMainSpec extends Specification {
       param.isHelp must beTrue
     }
   }
-  
-  "正常な conf のチェック" should {
-    val path = getClass.getResource("/AkemiConfigTest1.scala").getPath
-    "success が返ってくる" in {
+
+  "conf check 系" should {
+    "正常な conf のチェック結果は success が返ってくる" in {
+      val path = getClass.getResource("/AkemiConfigTest1.scala").getPath
       AkemiMain.check(path) must be_==("success")
     }
-  }
-
-  "不正な conf のチェック" should {
-    val path = getClass.getResource("/AkemiConfigTest_error1.scala").getPath
-
-    "エラーメッセージが返ってくる" in {
+    "不正な conf のチェック結果はエラーメッセージが返ってくる" in {
+      val path = getClass.getResource("/AkemiConfigTest_error1.scala").getPath
       AkemiMain.check(path) must not be_==("success")
     }
+    "パスが存在しなかった場合のチェック結果はエラーメッセージが返ってくる" in {
+      AkemiMain.check("fooo/bar") must not be_==("success")
+    }
+
   }
 }
