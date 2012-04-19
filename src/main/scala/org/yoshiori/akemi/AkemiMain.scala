@@ -30,7 +30,9 @@ Usage:
       case InitParam(path, true, _ ) => println(check(path))
       case InitParam(path, _, _ ) => {
         val eval = new Eval
-        val conf = eval[AkemiConfig](new java.io.File("config/AkemiConfigSample.scala"))
+        val file = new java.io.File(path)
+        logger.info("config file path => " + file.getAbsoluteFile())
+        val conf = eval[AkemiConfig](file)
         val akemi = Akemi(conf)
         akemi.run
       }

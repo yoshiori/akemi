@@ -13,7 +13,7 @@ Usage:
 
 To run 
 --------
-    sbt 'run -p conf/AkemiConfigSample.scala'
+    sbt 'run -p config/AkemiConfigSample.scala'
 
 
 Test
